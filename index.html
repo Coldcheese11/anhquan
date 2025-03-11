@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Web Bán Hàng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .products {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .product {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 200px;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #cart {
+            padding: 20px;
+            background-color: #fff;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        #cart-items {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #total {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Chào mừng đến với cửa hàng của chúng tôi!</h1>
+    </header>
+
+    <section class="products">
+        <div class="product">
+            <img src="product1.jpg" alt="Sản phẩm 1">
+            <h3>Sản phẩm 1</h3>
+            <p>Mô tả sản phẩm 1</p>
+            <span>Giá: 100.000 VND</span>
+            <button onclick="addToCart('Sản phẩm 1', 100000)">Thêm vào giỏ</button>
+        </div>
+        <div class="product">
+            <img src="product2.jpg" alt="Sản phẩm 2">
+            <h3>Sản phẩm 2</h3>
+            <p>Mô tả sản phẩm 2</p>
+            <span>Giá: 200.000 VND</span>
+            <button onclick="addToCart('Sản phẩm 2', 200000)">Thêm vào giỏ</button>
+        </div>
+    </section>
+
+    <section id="cart">
+        <h2>Giỏ hàng</h2>
+        <ul id="cart-items"></ul>
+        <p id="total">Tổng tiền: 0 VND</p>
+    </section>
+
+    <script>
+        let cart = [];
+        let totalPrice = 0;
+
+        function addToCart(productName, price) {
+            cart.push({ name: productName, price: price });
+            totalPrice += price;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById("cart-items");
+            cartItems.innerHTML = '';
+
+            cart.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = `${item.name} - ${item.price} VND`;
+                cartItems.appendChild(li);
+            });
+
+            const total = document.getElementById("total");
+            total.textContent = `Tổng tiền: ${totalPrice} VND`;
+        }
+    </script>
+</body>
+</html>
